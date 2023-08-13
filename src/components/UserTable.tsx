@@ -32,7 +32,7 @@ function UserTable({ users, onRemoveUser }: UserTableProps) {
               <th>Phone</th>
               <th>Company</th>
               <th>Address</th>
-              <th>Actions</th>
+              <th>Action</th>
             </tr>
           </thead>
           <tbody>

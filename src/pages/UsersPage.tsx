@@ -9,7 +9,6 @@ import { USER_API_URL } from '../apiUrls';
 
 function UsersPage() {
   const [warning, setWarning] = useState<string>('');
-  const [buttonColor] = useState<string>('green');
 
   const {
     loading,
@@ -42,24 +41,22 @@ function UsersPage() {
     <div>
       {!!warning && <WarningMessage message={warning} />}
       {!!loading && <LoadingPlaceholder />}
-      {!loading && !error && (
-        <div className={`${styles['buttons-count-container']}`}>
-          <div className={`${styles.count}`}>
-            <h2>Total Users: {users ? users.length : 0}</h2>
+      {!loading && !error && !!users && (
+        <div>
+          <div className={`${styles['buttons-count-container']}`}>
+            <div className={`${styles.count}`}>
+              <h2>Total Users: {users ? users.length : 0}</h2>
+            </div>
+            <Button
+              text="Reload Users"
+              color="green"
+              onClick={handleReloadUsers}
+            />
+            <Button text="Clear Users" color="red" onClick={handleClearUsers} />
           </div>
-          <Button
-            text="Reload Users"
-            color={buttonColor}
-            onClick={handleReloadUsers}
-          />
-          <Button
-            text="Clear Users"
-            color={buttonColor}
-            onClick={handleClearUsers}
-          />
+          <UserTable users={users} onRemoveUser={handleRemoveUser} />
         </div>
       )}
-      {!!users && <UserTable users={users} onRemoveUser={handleRemoveUser} />}
       {!!error && <p>sorry something went wrong</p>}
     </div>
   );
